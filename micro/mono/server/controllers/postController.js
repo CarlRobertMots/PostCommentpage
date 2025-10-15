@@ -23,19 +23,22 @@ class PostController {
         const postComments = comments.filter(c => c.postId === postId)
         res.json(postComments);
     }
-    static createComment(req, res) {
-        const { postId, content} = req.body || {};
+        static createComment(req, res) {
+        const postId = Number(req.params.postId);
+        const { content } = req.body || {};
 
-        if (!postId || !content) {
-            return res.status(400).json({ error: 'Post ID and content are required' });
+        if (!content) {
+            return res.status(400).json({ error: 'Content is required' });
         }
-        const post = posts.find(p => p.id === Number(postId));
+
+        const post = posts.find(p => p.id === postId);
         if (!post) return res.status(404).json({ error: 'Post not found' });
 
-        const newComment = new Comment(Number(postId), content);
+        const newComment = new Comment(postId, content);
         comments.push(newComment);
-        res.status(201).json(newComment)
+        res.status(201).json(newComment);
     }
+
    
 }
 

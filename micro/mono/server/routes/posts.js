@@ -5,7 +5,7 @@ const postController = require('../controllers/postController');
 Router.get('/', postController.getAllPosts);
 Router.post('/', postController.createPost);
 
-Router.get('/:postId/comment',postController.getAllComments);
-Router.post('/:postId/comment',postController.createComment);
+Router.get('/:postId/comments',postController.getAllComments);
+Router.post('/:postId/comments',postController.createComment);
 
 module.exports = Router;
